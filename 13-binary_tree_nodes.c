@@ -1,22 +1,22 @@
 #include "binary_trees.h"
 
 /**
- * binary_tree_nodes - Function to cout nodes with at least one child in tree
+ * bst_search - Searches for a value in a binary search tree.
+ * @tree: A pointer to the root node of the BST to search.
+ * @value: The value to search for in the BST.
  *
- * @tree:- pointer to the root node
- *
- * Return: Count of nodes with child
+ * Return: If the tree is NULL or the value is not found, NULL.
+ *         Otherwise, a pointer to the node containing the value.
  */
-size_t binary_tree_nodes(const binary_tree_t *tree)
+bst_t *bst_search(const bst_t *tree, int value)
 {
-	if (tree == NULL)
-		return 0;
-
-	if (tree->left == NULL && tree->right == NULL)
-		return 0;
-
-	size_t left_nodes = binary_tree_nodes(tree->left);
-	size_t right_nodes = binary_tree_nodes(tree->right);
-
-	return (left_nodes + right_nodes + 1);
+	if (tree != NULL)
+	{
+		if (tree->n == value)
+			return ((bst_t *)tree);
+		if (tree->n > value)
+			return (bst_search(tree->left, value));
+		return (bst_search(tree->right, value));
+	}
+	return (NULL);
 }
